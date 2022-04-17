@@ -1,0 +1,83 @@
+---
+title: "Math 312 Project"
+output: html_notebook
+---
+
+```{r}
+set.seed(25420)
+```
+
+
+```{r}
+#Set our n to 25 for X1...X25, alpha to .1 and, mu0 to 2
+n <- 20
+alpha <- .1
+df <- 1
+#Mean of a chisq distribution is equal to the degrees of freedom
+mu0 <- df
+
+#Set m to 10000 replicates
+m <- 10000
+
+p <- numeric(m) #To store p value
+
+#Run our simulation
+for(j in 1:m){
+  x <- rchisq(n,df)
+  ttest <- t.test(x, alternative = "t", mu = mu0)
+  p[j] <- ttest$p.value
+}
+
+#Print our p.hat 
+(p.hat <- mean(p < alpha))
+```
+
+```{r}
+#Set our n to 20
+n <- 20
+alpha <- .1
+
+#Set m to 10000 replicates
+m <- 10000
+
+min <- 0
+max <- 2
+#Mean of a uniform distribution is equal to the (a + b)/2
+mu0 <- (min+max)/2
+
+p <- numeric(m) #To store p value
+
+#Run our simulation
+for(j in 1:m){
+  x <- runif(n,min,max)
+  ttest <- t.test(x, alternative = "t", mu = mu0)
+  p[j] <- ttest$p.value
+}
+
+#Print our p.hat 
+(p.hat <- mean(p < alpha))
+```
+```{r}
+#Set our n to 20
+n <- 20
+alpha <- .1
+
+#Set m to 10000 replicates
+m <- 10000
+
+rate <- 1
+#Mean of a exponential distribution is equal to the 1/rate
+mu0 <- 1/rate
+
+p <- numeric(m) #To store p value
+
+#Run our simulation
+for(j in 1:m){
+  x <- rexp(n,rate)
+  ttest <- t.test(x, alternative = "t", mu = mu0)
+  p[j] <- ttest$p.value
+}
+
+#Print our p.hat 
+(p.hat <- mean(p < alpha))
+```

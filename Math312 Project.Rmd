@@ -1,17 +1,19 @@
 ---
 title: "Math 312 Project"
-output: html_notebook
+author: "Kenneth Straw and Logan Kramer"
+github: "https://github.com/loganizer405/MATH312Project"
+output: pdf_document
 ---
 
-```{r}
-set.seed(25420)
-```
-
+# Chi-squared Distribution
 
 ```{r}
-#Set our n to 25 for X1...X25, alpha to .1 and, mu0 to 2
+#Set seed
+set.seed(420)
+
+#Set our n to 20 for X1...X20 and alpha to 0.1
 n <- 20
-alpha <- .1
+alpha <- 0.10
 df <- 1
 #Mean of a chisq distribution is equal to the degrees of freedom
 mu0 <- df
@@ -23,7 +25,7 @@ p <- numeric(m) #To store p value
 
 #Run our simulation
 for(j in 1:m){
-  x <- rchisq(n,df)
+  x <- rchisq(n, df)
   ttest <- t.test(x, alternative = "t", mu = mu0)
   p[j] <- ttest$p.value
 }
@@ -31,25 +33,29 @@ for(j in 1:m){
 #Print our p.hat 
 (p.hat <- mean(p < alpha))
 ```
+# Uniform Distribution
 
 ```{r}
+#Set seed
+set.seed(420)
+
 #Set our n to 20
 n <- 20
-alpha <- .1
+alpha <- 0.10
 
 #Set m to 10000 replicates
 m <- 10000
 
 min <- 0
 max <- 2
-#Mean of a uniform distribution is equal to the (a + b)/2
+#Mean of a uniform distribution is equal to (a + b)/2
 mu0 <- (min+max)/2
 
 p <- numeric(m) #To store p value
 
 #Run our simulation
 for(j in 1:m){
-  x <- runif(n,min,max)
+  x <- runif(n, min, max)
   ttest <- t.test(x, alternative = "t", mu = mu0)
   p[j] <- ttest$p.value
 }
@@ -57,23 +63,29 @@ for(j in 1:m){
 #Print our p.hat 
 (p.hat <- mean(p < alpha))
 ```
+
+# Exponential Distribution
+
 ```{r}
+#Set seed
+set.seed(420)
+
 #Set our n to 20
 n <- 20
-alpha <- .1
+alpha <- 0.10
 
 #Set m to 10000 replicates
 m <- 10000
 
 rate <- 1
-#Mean of a exponential distribution is equal to the 1/rate
+#Mean of a exponential distribution is equal to 1/rate
 mu0 <- 1/rate
 
 p <- numeric(m) #To store p value
 
 #Run our simulation
 for(j in 1:m){
-  x <- rexp(n,rate)
+  x <- rexp(n, rate)
   ttest <- t.test(x, alternative = "t", mu = mu0)
   p[j] <- ttest$p.value
 }
